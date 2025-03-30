@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⭕️❌ゲーム</title>
+    <style>
+        body{
+            background-color: #ff8;
+        }
+        table{align-self: start;
+        }
+    </style>
+</head>
+<body>
+    <h1>⭕️❌ゲーム</h1>
+    <h2 id="turn">現在のプレイヤー: ❌</h2>
+    <p>
+        <button id="reset">リセット</button>
+    </p>
+    <canvas id="canvas" width="1000", height="1000"></canvas>
+    <script src="{{ url_for('static', filename='marubatu.js') }}"></script>
+</body>
+</html>
