@@ -7,8 +7,11 @@
     <style>
         body{
             background-color: #ff8;
+            justify-content: center;
         }
-        table{align-self: start;
+        canvas{
+            display: block;
+            margin-left: 200px;
         }
     </style>
 </head>
@@ -17,8 +20,10 @@
     <h2 id="turn">現在のプレイヤー: ❌</h2>
     <p>
         <button id="reset">リセット</button>
+        <a href="/gomokunarabe">ゴモクナラベイへゴー</a>
+        <a href="https://tetris-u72r.onrender.com/">TETRISへGO</a>
     </p>
-    <canvas id="canvas" width="1000", height="1000"></canvas>
+    <canvas id="canvas" width="470", height="470"></canvas>
     <script src="{{ url_for('static', filename='marubatu.js') }}"></script>
 </body>
 </html>

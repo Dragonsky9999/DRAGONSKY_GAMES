@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五目並べ</title>
+    <style>
+        body{
+          color: yellow;
+          background-color: rgb(61, 0, 61);
+          justify-content: center;
+          align-items: center;
+        }
+        canvas{
+          display: block;
+          margin-left: auto;
+        }
+        a{
+          color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>五目並べ</h1>
+    <h2 id="turn">現在のプレイヤー: ⚫️</h2>
+    <p>
+        <button id="reset">リセット</button>
+        <a href="/">⭕️閥へ5</a>
+        <a href="https://tetris-u72r.onrender.com/">TETRISへGO</a>
+    </p>
+    <p id="hello"></p>
+    <canvas id="canvas" width="1000", height="1000"></canvas>
+    <script src="{{ url_for('static', filename='gomoku.js') }}"></script>
+</body>
+</html>
