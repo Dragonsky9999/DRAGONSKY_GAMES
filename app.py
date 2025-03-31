@@ -7,9 +7,14 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/marubatu")
+def marubatu():
+    return render_template("marubatu.html")
+
 @app.route("/gomokunarabe")
 def gomokunarabe():
     return render_template("gomoku.html")
+
 
 
 if __name__ == "__main__":
