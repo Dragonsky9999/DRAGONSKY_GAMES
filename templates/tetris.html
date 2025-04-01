@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: rgb(0, 20, 20);
+            color:gold;
+        }
+        canvas {
+            display:inline;
+            margin-top:60px;
+            margin-left:300px
+
+        }
+        .fixed{
+            position:fixed;
+            display: block;
+            margin-left: auto;
+        }
+        a{
+            color:cyan;
+        }
+        img{
+            display:inline;
+            width:250px;
+            height: 300px;
+            margin-top:-500px;
+            margin-left: 750px;
+        }
+    </style>
     <title>TETRIS</title>
 </head>
 <body>
-お楽しみに！！
+    
+    <div class="fixed">
+        <h1>TETRIS</h1>
+        <p>
+          <button id="reset">リセット</button>
+          <a href="/">TOPページへ</a>
+        </p>
+    </div>
+
+    <canvas id="canvas" width="360" height="630"></canvas>
+    <img src="{{ url_for('static', filename='images/KeyBoard.jpeg')}}">
+    <script src="{{ url_for('static', filename='tetris.js' )}}"></script>
 </body>
 </html>
