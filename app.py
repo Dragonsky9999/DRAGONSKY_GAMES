@@ -15,7 +15,9 @@ def marubatu():
 def gomokunarabe():
     return render_template("gomoku.html")
 
-
+@app.route("/tetris")
+def tetris():
+    return render_template("tetris.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
