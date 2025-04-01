@@ -11,23 +11,42 @@
           justify-content: center;
           align-items: center;
         }
-        canvas{
+        .fixed{
+          position:fixed;
           display: block;
           margin-left: auto;
+        }
+        canvas{
+          margin-top:200px;
+          margin-left:150px;
         }
         a{
           color: yellowgreen;
         }
+        .advertisement{
+          position:fixed;
+          top:25%;
+          right:0;
+          z-index:1000;
+        }
     </style>
 </head>
 <body>
+    <div class="fixed">
     <h1>五目並べ</h1>
     <h2 id="turn">現在のプレイヤー: ⚫️</h2>
     <p>
       <button id="reset">リセット</button>
       <a href="/">TOPページへ</a>
     </p>
-    <canvas id="canvas" width="1000", height="1000"></canvas>
+    </div>
+    <canvas class="canvas" id="canvas" width="1000", height="1000"></canvas>
+    
+    <div class="advertisement">
+      <a href="//af.moshimo.com/af/c/click?a_id=4968581&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Feightyoneshop%2Fhl1811%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Feightyoneshop%2Fi%2F10007011%2F" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="//thumbnail.image.rakuten.co.jp/@0_mall/eightyoneshop/cabinet/10406332/phl1811/hl1811_2.jpg?_ex=128x128" alt="" style="border: medium;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=4968581&amp;p_id=54&amp;pc_id=54&amp;pl_id=616" alt="" loading="lazy" width="1" height="1" style="border: 0px;">
+      <a href="//af.moshimo.com/af/c/click?a_id=4968581&p_id=54&pc_id=54&pl_id=1256" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" attributionsrc><img src="//image.moshimo.com/af-img/0032/000000001256.gif" width="120" height="500" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=4968581&p_id=54&pc_id=54&pl_id=1256" width="1" height="1" style="border:none;" loading="lazy">
+    </div>
+
     <script src="{{ url_for('static', filename='gomoku.js') }}" defer></script>
 </body>
 </html>
