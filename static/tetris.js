@@ -282,7 +282,7 @@ function GameOver(){
 
 //矢印キーを押してもスクロールしない
 document.addEventListener("keydown", function(event) {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(event.key)) {
         event.preventDefault(); // 矢印キーのデフォルト動作（スクロール）を無効化
     }
 });
@@ -293,26 +293,26 @@ window.addEventListener("keydown", (event) =>{
     let key = event.key;
     console.log(key)
     //右へ
-    if(key === "l" || key === "ArrowRight"){
+    if(key === "l" || key === "ArrowRight" || key === "d"){
         if (canMoveRight()){
             blockX++;
             requestAnimationFrame(drawBoard);
         }
         //左へ
-    }if (key === "j" || key === "ArrowLeft"){
+    }if (key === "j" || key === "ArrowLeft" || key === "a"){
         if (canMoveLeft()){
             blockX--;
             requestAnimationFrame(drawBoard);
         }
     //急降下
-    }else if(key === "," || key === " "){
+    }else if(key === "," || key === " " || key === "w"){
         HardDrop();
     //上へ（チート）
     }else if(key === "I"){
         blockY--;
         requestAnimationFrame(drawBoard);
     //下へ
-    }else if(key === "k" || key === "ArrowDown"){
+    }else if(key === "k" || key === "ArrowDown" || key === "s"){
         if (canMoveDown()){
             blockY++;
             requestAnimationFrame(drawBoard);
