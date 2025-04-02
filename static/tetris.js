@@ -280,6 +280,13 @@ function GameOver(){
     }
 }
 
+//矢印キーを押してもスクロールしない
+document.addEventListener("keydown", function(event) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+        event.preventDefault(); // 矢印キーのデフォルト動作（スクロール）を無効化
+    }
+});
+
 
 //左右移動&回転
 window.addEventListener("keydown", (event) =>{
