@@ -7,12 +7,12 @@
         body{
             background-color: rgb(0, 20, 20);
             color:gold;
+            
         }
         canvas {
             display:inline;
             margin-top:60px;
             margin-left:300px
-
         }
         .fixed{
             position:fixed;
@@ -22,12 +22,20 @@
         a{
             color:cyan;
         }
-        img{
+        .img1{
             display:inline;
             width:250px;
             height: 300px;
             margin-top:-500px;
             margin-left: 750px;
+        }
+        .img2{
+            display:flex;
+            width:400px;
+            height:100px;
+            margin-top:0px;
+            margin-left:330px;
+            touch-action: manipulation;
         }
     </style>
     <title>TETRIS</title>
@@ -43,7 +51,19 @@
     </div>
 
     <canvas id="canvas" width="360" height="630"></canvas>
-    <img src="{{ url_for('static', filename='images/KeyBoard.jpeg')}}">
+    <img class="img1" src="{{ url_for('static', filename='images/KeyBoard.jpeg')}}">
+    
+    <div class="img2">
+        <img id="RotateLeft" src="{{ url_for('static', filename='images/RotateLeft.jpeg') }}">
+        <img id="HardDrop" src="{{ url_for('static', filename='images/HardDrop.jpeg') }}">
+        <img id="RotateRight" src="{{ url_for('static', filename='images/RotateRight.jpeg') }}">
+    </div>
+
+    <div class="img2">
+        <img id="ArrowLeft" src="{{ url_for('static', filename='images/ArrowLeft.jpeg') }}">
+        <img id="ArrowDown" src="{{ url_for('static', filename='images/ArrowDown.jpeg') }}">
+        <img id="ArrowRight" src="{{ url_for('static', filename='images/ArrowRight.jpeg') }}">
+    </div>
     <script src="{{ url_for('static', filename='tetris.js' )}}"></script>
 </body>
 </html>

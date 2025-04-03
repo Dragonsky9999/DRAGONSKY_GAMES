@@ -308,7 +308,7 @@ window.addEventListener("keydown", (event) =>{
             requestAnimationFrame(drawBoard);
         }
     //急降下
-    }else if(key === "," || key === " " || key === "w"){
+    }else if(key === "," || key === " " || key === "w" || key === "ArrowUp"){
         HardDrop();
     //上へ（チート）
     }else if(key === "I"){
@@ -329,13 +329,71 @@ window.addEventListener("keydown", (event) =>{
         RotateShape();
         RotateShape();
     //左回転
-    }else if(key === "o" || key === "ArrowUp"){
+    }else if(key === "o"){
         RotateShape();
     //スポーン（チート）
     }else if(key === "S"){
         spawnBlock();
     }
 })
+
+//モバイル対応
+
+function preventLongPressMenu(elementId) {
+    const element = document.getElementById(elementId);
+    
+    element.addEventListener("touchstart", (event) => {
+        event.preventDefault(); // 長押しメニューを防ぐ
+        element.click(); // クリック処理を実行
+    }, { passive: false });  
+}
+
+// クリックイベント（PC・スマホ共通）
+document.getElementById("ArrowLeft").addEventListener("click", () => {
+    if (canMoveLeft()){
+        blockX--;
+        requestAnimationFrame(drawBoard);
+    }
+});
+
+document.getElementById("ArrowRight").addEventListener("click", () => {
+    if (canMoveRight()){
+        blockX++;
+        requestAnimationFrame(drawBoard);
+    }
+});
+
+document.getElementById("ArrowDown").addEventListener("click", () => {
+    if (canMoveDown()){
+        blockY++;
+        requestAnimationFrame(drawBoard);
+    } else {
+        placeblock();
+        spawnBlock();
+    }
+});
+
+document.getElementById("RotateLeft").addEventListener("click", () => {
+    RotateShape();
+    RotateShape();
+    RotateShape();
+});
+
+document.getElementById("RotateRight").addEventListener("click", () => {
+    RotateShape();    
+});
+
+document.getElementById("HardDrop").addEventListener("click", () => {
+    HardDrop();
+});
+
+// 長押しを防ぐ処理を追加
+preventLongPressMenu("ArrowLeft");
+preventLongPressMenu("ArrowRight");
+preventLongPressMenu("ArrowDown");
+preventLongPressMenu("RotateLeft");
+preventLongPressMenu("RotateRight");
+preventLongPressMenu("HardDrop");
 
 //1回だけ表示
 requestAnimationFrame(drawBoard);
