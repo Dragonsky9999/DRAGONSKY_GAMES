@@ -39,6 +39,8 @@ let blockX = 4;
 let blockY = 0;
 let score = 0;
 let speed = document.getElementById("SPEED").value
+let mode = "endless";
+let level = 0;
 
 const I = {
     "shape":[
@@ -139,7 +141,8 @@ function drawBoard(){
             }
         }
     }
-    draw_block()
+    draw_block();
+    falseBlock();
 }
 
 //新しいテトリミノを生成
@@ -179,9 +182,29 @@ function update(){
         placeblock();
         spawnBlock();
     }
+    if (score === 0){
+        level = 0;
+    }else if (mode==="marason" && score % 10 === 0){
+        level = score / 10
+        document.getElementById("level").innerHTML = "現在のレベル: " + level;
+        speed = 1000 * 0.1 ** level;
+        clearInterval(gameloop);
+        gameloop = setInterval(update, speed)
+        if (level == 5){
+            window.alert("GAME CLEAR!! すごい!!");
+            speed = 1000;
+            reset();
+        }
+    }
 }
-//loop
-gameloop = setInterval(update, speed);
+
+let gameloop
+//モード別loop
+if (mode==="endless"){
+    gameloop = setInterval(update, speed);
+}else if (mode==="marason"){
+    gameloop = setInterval(update, speed);
+}
 
 //下へ動ける？
 function canMoveDown(){
@@ -265,6 +288,24 @@ function HardDrop(){
     spawnBlock();
 }
 
+//落ちる予測位置に白いやつ描画
+function falseBlock(){
+    let falseDistance = getDropDistance();
+    let falseY = blockY + falseDistance;
+    for (let i=0; i<current_shape.length; i++){
+        for (let j=0; j<current_shape[i].length; j++){
+            if (current_shape[i][j] === "1"){
+                ctx.beginPath();
+                ctx.fillStyle = "rgb(200 200 200 /25%)";
+                ctx.fillRect((blockX + j + 1) * gridSize, (falseY + i) * gridSize , gridSize, gridSize);
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "rgb(0 0 0 /25%)"
+                ctx.strokeRect((blockX + j + 1) * gridSize, (falseY + i) * gridSize , gridSize, gridSize);
+            }
+        }
+    }
+}
+
 //ライン消去
 function lineclear(){
     let lineToClear = []
@@ -278,7 +319,6 @@ function lineclear(){
         }
     }
 
-    console.log(lineToClear)
     for (let i=lineToClear.length-1; i>=0; i--){
         board.splice(lineToClear[i], 1);
     }
@@ -413,6 +453,25 @@ preventLongPressMenu("HardDrop");
 //1回だけ表示
 requestAnimationFrame(drawBoard);
 
+
+
+//モード変更
+document.getElementById("marason").addEventListener("click", () => {
+    speed = 1000;
+    mode = "marason";
+    document.getElementById("mode").innerHTML = "現在のモード: マラソン";
+    document.getElementById("level").innerHTML = "現在のレベル: 0";
+    console.log(level)
+    reset();
+});
+//モード変更
+document.getElementById("endless").addEventListener("click", () => {
+    mode = "endless";
+    document.getElementById("mode").innerHTML = "現在のモード: エンドレス";
+    document.getElementById("level").innerHTML = "";
+    reset();
+})
+
 //reset
 function reset(){
     //ボードを初期化
@@ -434,8 +493,14 @@ function reset(){
     blockX=4;
     blockY=0;
     speed = document.getElementById("SPEED").value
+    level = 0;
     clearInterval(gameloop)
-    setInterval(update, speed)
+    if (mode==="endless"){
+        gameloop = setInterval(update, speed);
+    }else if (mode==="marason"){
+    speed = 1000 * 0.8 ** level;
+        gameloop = setInterval(update, speed);
+    }
     //ボードを表示
     drawBoard();
 }

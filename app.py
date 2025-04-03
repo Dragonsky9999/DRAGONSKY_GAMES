@@ -24,4 +24,4 @@ def snake():
     return render_template("snake.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

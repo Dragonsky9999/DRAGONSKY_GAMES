@@ -50,9 +50,17 @@
           <a href="/">TOPページへ</a>
         </p>
         <h3 id="score">現在のスコア: 0ライン</h3>
+        <h3 id="mode">現在のモード: エンドレス</h3>
+        <h3 id="level"></h3>
+    </div>
+
+    <div class="fixed">
+        <button id="marason">マラソン</button>
+        <button id="endless">エンドレス</button>
     </div>
 
     <canvas id="canvas" width="360" height="630"></canvas>
+    
     <img class="img1" src="{{ url_for('static', filename='images/KeyBoard.jpeg')}}">
     
     <div class="img2">
@@ -60,12 +68,12 @@
         <img id="HardDrop" src="{{ url_for('static', filename='images/HardDrop.jpeg') }}">
         <img id="RotateRight" src="{{ url_for('static', filename='images/RotateRight.jpeg') }}">
     </div>
-
     <div class="img2">
         <img id="ArrowLeft" src="{{ url_for('static', filename='images/ArrowLeft.jpeg') }}">
         <img id="ArrowDown" src="{{ url_for('static', filename='images/ArrowDown.jpeg') }}">
         <img id="ArrowRight" src="{{ url_for('static', filename='images/ArrowRight.jpeg') }}">
     </div>
+
     <script src="{{ url_for('static', filename='tetris.js' )}}"></script>
 </body>
 </html>
