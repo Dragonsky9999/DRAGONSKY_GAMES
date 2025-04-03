@@ -277,10 +277,14 @@ function lineclear(){
         }
     }
 
+    console.log(lineToClear)
     for (let i=lineToClear.length-1; i>=0; i--){
         board.splice(lineToClear[i], 1);
+    }
+    for (let i=0; i<lineToClear.length; i++){
         board.unshift(Array(10).fill("0"));
     }
+    
     if (lineToClear > 0){
         requestAnimationFrame(drawBoard)
     }
@@ -418,6 +422,8 @@ function reset(){
             board[row][col] = "0";
         }
     }
+    score = 0;
+    document.getElementById("score").innerHTML = "現在のスコア: 0ライン" 
     block = [I, O, T, Z, S, L, J]
     //現在のブロックを初期化
     num = Math.floor(Math.random() * block.length);
@@ -426,7 +432,6 @@ function reset(){
     //ブロック座標を初期化
     blockX=4;
     blockY=0;
-    score = 0;
     //ボードを表示
     drawBoard();
 }
