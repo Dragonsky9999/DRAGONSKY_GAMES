@@ -426,6 +426,7 @@ function reset(){
     //ブロック座標を初期化
     blockX=4;
     blockY=0;
+    score = 0;
     //ボードを表示
     drawBoard();
 }
