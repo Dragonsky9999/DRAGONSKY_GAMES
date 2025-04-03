@@ -30,7 +30,8 @@ for (let row = 0; row < 20; row++) {
     for (let col = 0; col < 10; col++) {
         board[row][col] = "0";  // 初期値として "0" をセット
     }
-}const gridSize = 30;
+}
+const gridSize = 30;
 const columns = 10;
 const rows = 20;
 
@@ -79,15 +80,14 @@ const J = {
     ],
     "color": "rgb(0, 0, 255)"}
 
-
-const block = [I, O, T, Z, S, L, J]
-let num = Math.floor(Math.random() * 7);
+let block = [I, O, T, Z, S, L, J]
+let num = Math.floor(Math.random() * block.length);
 let blocktype = block[num];
 let current_shape = block[num].shape
-let shapeHeight = current_shape.length
-
+block.splice(num,1)
+    
 //blockを描画
-function draw_block(x, y){
+function draw_block(){
     for (let i=0; i<current_shape.length; i++){
         for (let j=0; j<current_shape[i].length; j++){
             if (current_shape[i][j] === "1"){
@@ -137,14 +137,18 @@ function drawBoard(){
             }
         }
     }
-    draw_block(blockX, blockY)
+    draw_block()
 }
 
 //新しいテトリミノを生成
 function spawnBlock(){
-        let num = Math.floor(Math.random() * 7);
+    
+        if (block.length === 0) block = [I, O, T, Z, S, L, J]
+        num = Math.floor(Math.random() * block.length);
         blocktype = block[num];
         current_shape = block[num].shape
+        //ブロックから、現在のブロックを消す
+        block.splice(num,1)
         blockX = 4;
         blockY = 0;
         requestAnimationFrame(drawBoard);
@@ -291,7 +295,6 @@ document.addEventListener("keydown", function(event) {
 //左右移動&回転
 window.addEventListener("keydown", (event) =>{
     let key = event.key;
-    console.log(key)
     //右へ
     if(key === "l" || key === "ArrowRight" || key === "d"){
         if (canMoveRight()){
@@ -347,11 +350,11 @@ function reset(){
             board[row][col] = "0";
         }
     }
+    block = [I, O, T, Z, S, L, J]
     //現在のブロックを初期化
-    num = Math.floor(Math.random() * 7);
+    num = Math.floor(Math.random() * block.length);
     blocktype = block[num];
     current_shape = block[num].shape
-    shapeHeight = current_shape.length
     //ブロック座標を初期化
     blockX=4;
     blockY=0;
