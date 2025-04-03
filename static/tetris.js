@@ -187,7 +187,7 @@ function update(){
     }else if (mode==="marason" && score % 10 === 0){
         level = score / 10
         document.getElementById("level").innerHTML = "現在のレベル: " + level;
-        speed = 1000 * 0.1 ** level;
+        speed = 1000 * 0.8 ** level;
         clearInterval(gameloop);
         gameloop = setInterval(update, speed)
         if (level == 5){
