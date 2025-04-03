@@ -37,6 +37,7 @@ const rows = 20;
 
 let blockX = 4;
 let blockY = 0;
+let score = 0;
 
 const I = {
     "shape":[
@@ -265,21 +266,30 @@ function HardDrop(){
 
 //ライン消去
 function lineclear(){
-    let cleared = false;
-    for (let row = board.length - 1; row >=0; row--){
+    let lineToClear = []
+    
+    //リストアップ
+    for (let row=0; row<board.length; row++){
         if (board[row].join("") === "1111111111"){
-            board.splice(row, 1);
-            board.unshift(Array(10).fill("0"));
-            cleared = true;
+            lineToClear.push(row);
+            score++;
+            document.getElementById("score").innerHTML = "現在のスコア: " +score+ "ライン"
         }
     }
-    if (cleared) requestAnimationFrame(drawBoard);
+
+    for (let i=lineToClear.length-1; i>=0; i--){
+        board.splice(lineToClear[i], 1);
+        board.unshift(Array(10).fill("0"));
+    }
+    if (lineToClear > 0){
+        requestAnimationFrame(drawBoard)
+    }
 }
 
 //1番上に来たらGAME OVER
 function GameOver(){
     if (board[0].includes("1")){
-        window.alert("GAME OVER");
+        window.alert("GAME OVER!!" + score + "ライン消去でした！！" );
         reset();
     }
 }
