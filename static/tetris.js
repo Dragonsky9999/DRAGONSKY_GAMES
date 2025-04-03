@@ -38,6 +38,7 @@ const rows = 20;
 let blockX = 4;
 let blockY = 0;
 let score = 0;
+let speed = document.getElementById("SPEED").value
 
 const I = {
     "shape":[
@@ -180,7 +181,7 @@ function update(){
     }
 }
 //loop
-setInterval(update, 1000);
+gameloop = setInterval(update, speed);
 
 //下へ動ける？
 function canMoveDown(){
@@ -432,6 +433,9 @@ function reset(){
     //ブロック座標を初期化
     blockX=4;
     blockY=0;
+    speed = document.getElementById("SPEED").value
+    clearInterval(gameloop)
+    setInterval(update, speed)
     //ボードを表示
     drawBoard();
 }
