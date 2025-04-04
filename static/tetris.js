@@ -190,8 +190,9 @@ function update(){
         speed = 1000 * 0.8 ** level;
         clearInterval(gameloop);
         gameloop = setInterval(update, speed)
-        if (level == 5){
+        if (level == 20){
             window.alert("GAME CLEAR!! すごい!!");
+            document.getElementById("level").innerHTML = "現在のレベル: 0"
             speed = 1000;
             reset();
         }
