@@ -1,6 +1,10 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const Hold = document.getElementById("Hold");
+const ctxHold = Hold.getContext("2d");
+requestAnimationFrame(drawHoldBlock);
+
 
 //背景表示
 function drawBackground(){
@@ -17,7 +21,7 @@ function drawBackground(){
     ctx.lineTo(345,630);
     ctx.stroke();
     ctx.moveTo(15,615);
-    ctx.lineTo(375,615);
+    ctx.lineTo(345,615);
     ctx.stroke();
 
 }
@@ -88,6 +92,8 @@ let block = [];
 let blocktype;
 let current_shape;
 spawnBlock();
+
+let holdBlock;
     
 //blockを描画
 function draw_block(){
@@ -182,18 +188,58 @@ function drawNextBlock(num, x, y){
     }
 }
 
+function drawHoldBlock(){
+    ctxHold.clearRect(0, 0, Hold.width, Hold.height);
+    ctxHold.fillStyle = "rgb(150 150 250 / 100%)";
+    ctxHold.fillRect(0,0,95,95);
+    ctxHold.strokeStyle = "rgb(240, 50, 50)"
+    ctxHold.lineWidth = "5";
+    ctxHold.strokeRect(0, 0, 95, 95);
+
+    for (let row=0; row<holdBlock.shape.length; row++){
+        for (let col=0; col<holdBlock.shape[row].length; col++){
+            if (holdBlock.shape[row][col] === "1"){
+                ctxHold.beginPath();
+                ctxHold.fillStyle = holdBlock.color;
+                ctxHold.fillRect(14+col*gridSize * 0.8, 26+row*gridSize * 0.8, gridSize*0.8, gridSize*0.8);
+                ctxHold.lineWidth = "2";
+                ctxHold.strokeStyle = "black";
+                ctxHold.strokeRect(14+col*gridSize *0.8, 26+row*gridSize *0.8, gridSize*0.8, gridSize*0.8);
+            }
+        }
+    }
+}
+
 //新しいテトリミノを生成
 function spawnBlock(){
-    if (block.length === 0) {
-        let Firstblock = [I, O, T, Z, S, L, J]
+    let Firstblock = [I, O, T, Z, S, L, J]
 
+    if (block.length === 0) {
         for (let i=Firstblock.length-1; i>0; i--){
             let j = Math.floor(Math.random() * (i+1));
             [Firstblock[i], Firstblock[j]] = [Firstblock[j], Firstblock[i]];
         }
         block = Firstblock.slice();
-
+        for (let i=Firstblock.length-1; i>0; i--){
+            let j = Math.floor(Math.random() * (i+1));
+            [Firstblock[i], Firstblock[j]] = [Firstblock[j], Firstblock[i]];
+        }
+        for (let i=0; i<Firstblock.length; i++){
+            block.push(Firstblock[i]);
+        }
     }
+
+    if (block.length === 7){
+        for (let i=Firstblock.length-1; i>0; i--){
+            let j = Math.floor(Math.random() * (i+1));
+            [Firstblock[i], Firstblock[j]] = [Firstblock[j], Firstblock[i]];
+        }
+    for (let i=0; i<Firstblock.length; i++){
+            block.push(Firstblock[i]);
+        }
+    }
+
+    console.log(block.length)
     blocktype = block.shift();
     current_shape = blocktype.shape;
 
@@ -241,6 +287,7 @@ function update(){
             reset();
         }
     }
+    requestAnimationFrame(drawHoldBlock);
 }
 
 let gameloop
@@ -434,6 +481,24 @@ window.addEventListener("keydown", (event) =>{
     //スポーン（チート）
     }else if(key === "S"){
         spawnBlock();
+    }else if(key === "h"){
+        if (holdBlock === undefined){
+            holdBlock = blocktype;
+            blocktype = block.shift();
+            current_shape = blocktype.shape;
+            blockX = 4;
+            blockY = 0;
+            drawHoldBlock();
+        }else{
+            let temp = holdBlock;
+            holdBlock = blocktype;
+            blocktype = temp;
+            current_shape = blocktype.shape;
+            blockX = 4;
+            blockY = 0;
+        }
+        requestAnimationFrame(drawBoard);
+        requestAnimationFrame(drawHoldBlock);
     }
 })
 
@@ -534,12 +599,15 @@ function reset(){
     //ブロック座標を初期化
     speed = document.getElementById("SPEED").value
     level = 0;
+    holdBlock = undefined;
+    requestAnimationFrame(drawHoldBlock);
     clearInterval(gameloop)
     if (mode==="endless"){
         gameloop = setInterval(update, speed);
     }else if (mode==="marason"){
     speed = 1000 * 0.8 ** level;
         gameloop = setInterval(update, speed);
+        document.getElementById("level").innerHTML = "現在のレベル: 0";
     }
     //ボードを表示
     drawBoard();
