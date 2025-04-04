@@ -551,6 +551,26 @@ document.getElementById("RotateRight").addEventListener("click", () => {
 document.getElementById("HardDrop").addEventListener("click", () => {
     HardDrop();
 });
+document.getElementById("HoldBtn").addEventListener("click", () => {
+    if (holdBlock === undefined){
+        holdBlock = blocktype;
+        blocktype = block.shift();
+        current_shape = blocktype.shape;
+        blockX = 4;
+        blockY = 0;
+        drawHoldBlock();
+    }else{
+        let temp = holdBlock;
+        holdBlock = blocktype;
+        blocktype = temp;
+        current_shape = blocktype.shape;
+        blockX = 4;
+        blockY = 0;
+    }
+    requestAnimationFrame(drawBoard);
+    requestAnimationFrame(drawHoldBlock());
+}
+);
 
 // 長押しを防ぐ処理を追加
 preventLongPressMenu("ArrowLeft");
@@ -559,6 +579,8 @@ preventLongPressMenu("ArrowDown");
 preventLongPressMenu("RotateLeft");
 preventLongPressMenu("RotateRight");
 preventLongPressMenu("HardDrop");
+preventLongPressMenu("Hold");
+
 
 //1回だけ表示
 requestAnimationFrame(drawBoard);

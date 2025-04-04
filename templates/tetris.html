@@ -43,6 +43,13 @@
             margin-left:345px;
             touch-action: manipulation;
         }
+        .img3{
+            display:flex;
+            width:600px;
+            height:100px;
+            margin-top:0px;
+            margin-left: 390px;
+        }
     </style>
     <title>TETRIS</title>
 </head>
@@ -80,6 +87,9 @@
         <img id="ArrowLeft" src="{{ url_for('static', filename='images/ArrowLeft.jpeg') }}">
         <img id="ArrowDown" src="{{ url_for('static', filename='images/ArrowDown.jpeg') }}">
         <img id="ArrowRight" src="{{ url_for('static', filename='images/ArrowRight.jpeg') }}">
+    </div>
+    <div class="img3">
+        <img id="HoldBtn" src="{{ url_for('static', filename='images/Hold.jpeg') }}">
     </div>
 
     <script src="{{ url_for('static', filename='tetris.js' )}}"></script>
