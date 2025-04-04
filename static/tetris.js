@@ -124,8 +124,9 @@ function RotateShape(){
 
 //画面をクリアして、ブロックを描画
 function drawBoard(){
-    ctx.clearRect(0, 0, 360, 630);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBackground();
+    drawNextBlockBackground();
     for (let i=0; i<board.length; i++){
         for (let j=0; j<board[i].length; j++){
             if (board[i][j] === "1"){
@@ -143,9 +144,9 @@ function drawBoard(){
     draw_block();
     //次のブロック用背景
     //次のブロックを描画
-    drawNextBlock(0, 0, 0);
-    drawNextBlock(1, 0, 100);
-    drawNextBlock(2, 0, 200);
+    drawNextBlock(0, 379, 10);
+    drawNextBlock(1, 379, 110);
+    drawNextBlock(2, 379, 210);
     //ハードドロップの予測位置を描画
     falseBlock();
 }
@@ -156,10 +157,10 @@ drawNextBlockBackground();
 function drawNextBlockBackground(){
     ctx.beginPath();
     ctx.fillStyle = "rgb(150 150 250 / 100%)";
-    ctx.fillRect(350,0,100,200);
+    ctx.fillRect(365,0,100,269);
     ctx.strokeStyle = "rgb(240, 50, 50)"
     ctx.lineWidth = "5";
-    ctx.strokeRect(350,0,100,200);
+    ctx.strokeRect(365,0,100,269);
 }
 
 //次のブロック描画用
