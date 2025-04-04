@@ -7,7 +7,7 @@ function drawBackground(){
 
     ctx.beginPath();
     ctx.fillStyle = "rgb(150 150 250 / 100%)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillRect(0,0,360,630);
     ctx.strokeStyle = "rgb(220, 220, 220)"
     ctx.moveTo(15,0);
     ctx.lineTo(15,630);
@@ -84,11 +84,10 @@ const J = {
     ],
     "color": "rgb(0, 0, 255)"}
 
-let block = [I, O, T, Z, S, L, J]
-let num = Math.floor(Math.random() * block.length);
-let blocktype = block[num];
-let current_shape = block[num].shape
-block.splice(num,1)
+let block = [];
+let blocktype;
+let current_shape;
+spawnBlock();
     
 //blockを描画
 function draw_block(){
@@ -125,7 +124,7 @@ function RotateShape(){
 
 //画面をクリアして、ブロックを描画
 function drawBoard(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, 360, 630);
     drawBackground();
     for (let i=0; i<board.length; i++){
         for (let j=0; j<board[i].length; j++){
@@ -142,21 +141,65 @@ function drawBoard(){
         }
     }
     draw_block();
+    //次のブロック用背景
+    //次のブロックを描画
+    drawNextBlock(0, 0, 0);
+    drawNextBlock(1, 0, 100);
+    drawNextBlock(2, 0, 200);
+    //ハードドロップの予測位置を描画
     falseBlock();
+}
+//一回だけ描画
+drawNextBlockBackground();
+
+//次のブロックよう背景
+function drawNextBlockBackground(){
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(150 150 250 / 100%)";
+    ctx.fillRect(350,0,100,200);
+    ctx.strokeStyle = "rgb(240, 50, 50)"
+    ctx.lineWidth = "5";
+    ctx.strokeRect(350,0,100,200);
+}
+
+//次のブロック描画用
+function drawNextBlock(num, x, y){
+    let nextBlock = block[num];
+    let nextBlockShape = nextBlock.shape;
+    let nextBlockColor = nextBlock.color;
+    for (let row=0; row<nextBlockShape.length; row++){
+        for (let col=0; col<nextBlockShape[row].length; col++){
+            if (nextBlockShape[row][col] === "1"){
+                ctx.beginPath();
+                ctx.fillStyle = nextBlockColor;
+                ctx.fillRect(x + col*gridSize * 0.8, y + row*gridSize * 0.8, gridSize*0.8, gridSize*0.8);
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "black";
+                ctx.strokeRect(x + col*gridSize *0.8, y + row*gridSize *0.8, gridSize*0.8, gridSize*0.8);
+            }
+        }
+    }
 }
 
 //新しいテトリミノを生成
 function spawnBlock(){
-    
-        if (block.length === 0) block = [I, O, T, Z, S, L, J]
-        num = Math.floor(Math.random() * block.length);
-        blocktype = block[num];
-        current_shape = block[num].shape
-        //ブロックから、現在のブロックを消す
-        block.splice(num,1)
-        blockX = 4;
-        blockY = 0;
-        requestAnimationFrame(drawBoard);
+    if (block.length === 0) {
+        let Firstblock = [I, O, T, Z, S, L, J]
+
+        for (let i=Firstblock.length-1; i>0; i--){
+            let j = Math.floor(Math.random() * (i+1));
+            [Firstblock[i], Firstblock[j]] = [Firstblock[j], Firstblock[i]];
+        }
+        block = Firstblock.slice();
+
+    }
+    blocktype = block.shift();
+    current_shape = blocktype.shape;
+
+    blockX = 4;
+    blockY = 0;
+
+    requestAnimationFrame(drawBoard);
 }
 
 //テトリミノを置く
@@ -462,7 +505,6 @@ document.getElementById("marason").addEventListener("click", () => {
     mode = "marason";
     document.getElementById("mode").innerHTML = "現在のモード: マラソン";
     document.getElementById("level").innerHTML = "現在のレベル: 0";
-    console.log(level)
     reset();
 });
 //モード変更
@@ -485,14 +527,10 @@ function reset(){
     }
     score = 0;
     document.getElementById("score").innerHTML = "現在のスコア: 0ライン" 
-    block = [I, O, T, Z, S, L, J]
+    Firstblock = 0;
+    spawnBlock();
     //現在のブロックを初期化
-    num = Math.floor(Math.random() * block.length);
-    blocktype = block[num];
-    current_shape = block[num].shape
     //ブロック座標を初期化
-    blockX=4;
-    blockY=0;
     speed = document.getElementById("SPEED").value
     level = 0;
     clearInterval(gameloop)
