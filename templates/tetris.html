@@ -6,9 +6,16 @@
     <style>
         body{
             background-color: rgb(0, 20, 20);
-            color:gold;
+            color:rgba(255 255 50 / 0.9);
             margin:0;
             padding:0;}
+        hr{
+            border: 0;
+            height: 3px;
+            background-color: rgba(55, 255, 55, 0.5);}
+        h2{
+            color:rgba(255 50 50);
+        }
         .canvas {
             display:block;
             position:absolute;
@@ -20,6 +27,7 @@
             top:50px;
             left: 350px;}
         .fixed {
+            display:inline-block;
             position: block;
             top: 0px;
             left: 0px;
@@ -40,35 +48,36 @@
         .img2{
             display: block;
             position: absolute;
-            top: 675px;
-            left: 400px;
+            top: 670px;
+            left: 370px;
             width: 100%;
             height: 100%;
-            display:flex;
+            display:fill;
         }
         .img3{
             display: block;
             position: absolute;
-            top: 800px;
-            left: 400px;
-            width:660px;
-            height: 50px;
+            top: 785px;
+            left: 370px;
+            width: 100%;
+            height: 100%;
             object-fit: fill;}
         .img4{
             display: block;
             position: absolute;
-            top: 930px;
-            left: 450px;
+            top: 900px;
+            left: 420px;
             width: 100%;
             height: 100%;
             object-fit: fill;}  
         .img2 img,.img3 img{
-            width:160px;
-            height: 130px;
-            object-fit: fill;}
-        .img4 img{
-            width: 360px;
+            width:180px;
             height: 120px;
+            object-fit: fill;
+        }
+        .img4 img{
+            width: 410px;
+            height: 110px;
             object-fit: fill;}
         
         </style>
@@ -79,18 +88,42 @@
     <div class="fixed">
         <h1>TETRIS</h1>
         <p>
-          <input type="number" id="SPEED" value="1000" placeholder="SPEED,DEFAULT: 1000 [ms]">
-          <button id="reset">リセット</button>
-          <a href="/">TOPページへ</a>
+            <button id="reset">リセット</button>
+            <a href="/">TOPページへ</a>
         </p>
-        <h3 id="score">現在のスコア: 0ライン</h3>
+        <hr>
+        <p>テトリミノの落ちる速度 単位[ms]</p>
+          <input type="number" id="SPEED" value="1000" placeholder="SPEED,DEFAULT: 1000 [ms]">
+        </p>
+        <hr>
+        <h2 id="score">現在のスコア: 0ライン</h2>
+        <hr>
+        <h2>モード選択</h2>
         <h3 id="mode">現在のモード: エンドレス</h3>
         <h3 id="level"></h3>
-    </div>
-
-    <div class="fixed">
+        <p>モードを選択してください</p>
         <button id="marason">マラソン</button>
         <button id="endless">エンドレス</button>
+        <h4>モード紹介</h4>
+        <p>エンドレス: GAME OVERになるまで</p>
+        <p>マラソン: 10ラインを消すたびにスピードが上がる</p>
+        <hr>
+        <h2>操作方法</h2>
+        <pre>キーボードまたは右のボタンをタッチ
+でテトリミノを操作できます
+        </pre>
+        <h4>>キーボード操作</h4>
+        <pre>
+    左移動:  j    a    →
+    右移動:  l    d    ←
+    下移動:  k    s    ↓
+    右回転:  o
+    左回転:  u
+    ホールド:  h
+    ハードドロップ:  ,    Speace
+        </pre>
+        <hr>
+        <br><br>
     </div>
 
     <canvas class="canvas" id="canvas" width="500" height="630"></canvas>
