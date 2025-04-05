@@ -72,7 +72,7 @@ function updata(){
     }
 
     if (head.x < 0 || head.x >= boardSize|| head.y < 0 || head.y >= boardSize || snake.slice(1).some(segment => segment.x === head.x && segment.y ===head.y)){
-        alert("GEME OVER!!");
+        alert("GEME OVER!!"+"\nスコア: "+ snake.length);
         reset();
         return;
     }
@@ -87,6 +87,7 @@ function updata(){
     }
     
     drawBoard();
+    document.getElementById("score").innerHTML = "現在のスコア: "+ snake.length;
 }
 
 //キーボード入力処理
@@ -118,7 +119,7 @@ function reset(){
     board = Array.from({ length:boardSize }, () => Array(boardSize).fill("0"));
     spawnApple();
     drawBoard();
-    gameloop = setInterval(updata, speed)
+    gameloop = setInterval(updata, speed);
 }
 
 document.getElementById("reset").addEventListener("click", () => {
