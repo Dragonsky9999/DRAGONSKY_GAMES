@@ -579,7 +579,7 @@ preventLongPressMenu("ArrowDown");
 preventLongPressMenu("RotateLeft");
 preventLongPressMenu("RotateRight");
 preventLongPressMenu("HardDrop");
-preventLongPressMenu("Hold");
+preventLongPressMenu("HoldBtn");
 
 
 //1回だけ表示
