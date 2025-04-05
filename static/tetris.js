@@ -499,6 +499,8 @@ window.addEventListener("keydown", (event) =>{
         }
         requestAnimationFrame(drawBoard);
         requestAnimationFrame(drawHoldBlock);
+    }else if(key === "r"){
+        reset();
     }
 })
 
@@ -635,7 +637,15 @@ function reset(){
     drawBoard();
 }
 
+// ページ読み込み後にスクロール位置を設定
+window.onload = function() {
+    window.scrollTo(500, 0);
+  };
+
 //reset
 document.getElementById("reset").addEventListener("click", () => {
+    reset();
+})
+document.getElementById("setSpeed").addEventListener("click", () => {
     reset();
 })
