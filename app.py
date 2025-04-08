@@ -23,5 +23,9 @@ def tetris():
 def snake():
     return render_template("snake.html")
 
+@app.route("/flappy")
+def flappy():
+    return render_template("flappy.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

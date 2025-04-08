@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>フラッピーゲーム</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/flappyStyle.css') }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="title">
+    <h1 id="FlappyBird">Flappy Bird</h1>
+</div>
+
+<div id="parentCanvas"></div>
+
+<div id="popup" class="hidden">
+    <div id="popup-box">
+        <h2 id=GameOver>Game Over!!!!</h2>
+        <p id="scoreText">Score: 0 点</p>
+        <button id="close">やめる</button>
+        <button id="reset">もう一度プレイ</button>
+    </div>
+</div>
+
+<div id="description">
+    <button class="StartBtns">スタート</button>
+    <br><br>    
+    
+    <div class="description-box">
+            <h2>ゲーム説明</h2>
+            <p>フラッピーバードはフラッピーをジャンプさせて右から迫ってくるパイプを避けるゲームです。<br>パイプに激突したり、空から落ちると、GAME OVER!ハイスコアを目指そう！！</p>
+    </div>  
+    <br><br>    
+    <div class="description-box">
+        <h2>操作方法</h2>
+        <p>スタートを押してスクリーンが出たら、<br>タッチまたはSpaceキーでフラッピーをジャンプ!!</p>
+    </div>
+    <br><br>    
+    
+    <div class="description-box">
+        <h2>難易度設定</h2>
+        <div class="levelBtns">
+            <botton id="easy" class="levelBtn easy">Easy</botton>
+            <botton id="normal" class="levelBtn normal active">Normal</botton>
+            <botton id="hard" class="levelBtn hard">Hard</botton>
+        </div>
+    </div>
+    <br><br>    
+    
+    <div class="description-box">
+        <h2>各種設定</h2>
+        <p>
+            手動でも難易度やスクリーンのサイズを変えられます。
+            それぞれデフォルトが1です。<br>変更したい設定を入力して、スタートを押そう!!
+        </p>
+        <hr class="hr2">
+        
+        <h3>スクリーン設定</h3>
+        <p>デフォルト: 横幅600px × 高さ500px</p>
+        <label for="canvasWidth">スクリーンの横幅: </label>
+        <input type="number" id="canvasWidth" value=1 placeholder="">
+        <br>
+        
+        <label for="canvasHeight">スクリーンの高さ: </label>
+        <input type="number" id="canvasHeight" value=1>
+        <br><hr class="hr2">
+        
+        <h3>フラッピー設定</h3>
+        <p>デフォルト: フラッピーのサイズ50px</p>
+        <label for="flappySize">フラッピーのサイズ: </label>
+        <input type="number" id="flappySize" value=1>
+        <br>
+        
+        <label for="jumpStrength">ジャンプ力: </label>
+        <input type="number" id="jumpStrength" value=1>
+        <br><hr class="hr2">
+        
+        <h3>パイプ設定</h3>
+        <p>デフォルト: パイプの横幅70px, 上下パイプの間隔150px, 次のパイプとの間隔200フレーム<br>
+        差が小さいほど難しい...</p>
+        <label for="pipeSize">パイプの横幅: </label>
+        <input type="number" id="pipeSize" value=1>
+        <br>
+        
+        <label for="pipeGap">上下パイプの間隔: </label>
+        <input type="number" id="pipeGap" value=1>
+        <br>
+        
+        <label for="pipeInterval">次のパイプとの間隔: </label>
+        <input type="number" id="pipeInterval" value=1>
+        <br><hr class="hr2">
+
+        <h3>その他設定</h3> 
+        <p>重力が小さいと難しい...</p>
+        <label for="gravity">重力: </label>
+        <input type="number" id="gravity" value=1>
+        <br><br>
+    </div>
+    <br>
+    <button class="StartBtns">スタート</button>
+</div>
+
+<script src="{{ url_for('static', filename='flappy.js' )}}"></script>
+{% endblock %}
