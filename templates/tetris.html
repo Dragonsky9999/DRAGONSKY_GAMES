@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: rgb(0, 20, 20);
+            color:rgba(255 255 50 / 0.9);
+            margin:0;
+            padding:0;}
+        hr{
+            border: 0;
+            height: 3px;
+            background-color: rgba(55, 255, 55, 0.5);}
+        h2{
+            color:rgba(255 50 50);
+        }
+        .canvas {
+            display:block;
+            position:absolute;
+            top:50px;
+            left: 500px;}
+        .Hold {
+            display:block;
+            position:absolute;
+            top:50px;
+            left: 400px;}
+        .fixed {
+            display:inline-block;
+            position: block;
+            top: 0px;
+            left: 0px;
+            z-index: 10;
+            background: rgba(55, 25, 155, 0.9); /* 半透明にしたいなら */
+            padding: 0;
+            margin: 0;}
+        a{color:cyan;}
+
+        @media (min-width: 768px) {
+            .img2, .img3, .img4 {
+                display: none;
+            }
+
+            .img1 {
+                display: flex;
+                position: absolute;
+                top: 800px;
+                left: 400px;
+                width: 250px;
+                height: 300px;
+                object-fit: fill;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .img1 {
+                display: none;
+            }
+            .img2 {
+                display: flex;
+                position: absolute;
+                top: 680px;
+                left: 480px;
+                width: 150px;
+                height: 140px;
+                object-fit: fill;
+            }
+
+            .img3 {
+                display: flex;
+                position: absolute;
+                top: 800px;
+                left: 480px;
+                width: 140px;
+                height: 140px;
+                object-fit: fill;
+            }
+
+            .img4 {
+                display: flex;
+                position: absolute;
+                top: 920px;
+                left: 480px;
+                width: 416px;
+                height: 110px;
+                object-fit: fill;
+            }
+
+            .img2 img, .img3 img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
+
+            .img4 img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
+        }
+    </style>
+    <title>TETRIS</title>
+</head>
+<body>
+    
+    <div class="fixed">
+        <h1>TETRIS</h1>
+        <p>
+            <button id="reset">リセット</button>
+            <a href="/">TOPページへ</a>
+        </p>
+        <hr>
+        <p>テトリミノの落ちる速度 単位[ms]</p>
+          <input type="number" id="SPEED" value="1000" placeholder="SPEED,DEFAULT: 1000 [ms]">
+          <button id="setSpeed">適用</button>
+        </p>
+        <hr>
+        <h2 id="score">現在のスコア: 0ライン</h2>
+        <hr>
+        <h2>モード選択</h2>
+        <h3 id="mode">現在のモード: エンドレス</h3>
+        <h3 id="level"></h3>
+        <p>モードを選択してください</p>
+        <button id="marason">マラソン</button>
+        <button id="endless">エンドレス</button>
+        <h4>モード紹介</h4>
+        <p>エンドレス: GAME OVERになるまで</p>
+        <p>マラソン: 10ラインを消すたびにスピードが上がる</p>
+        <hr>
+        <h2>操作方法</h2>
+        <pre>キーボードまたはスマホの場合は右のボタンをタッチ
+でテトリミノを操作できます
+        </pre>
+        <h4>>キーボード操作</h4>
+        <pre>
+    左移動:  j    a    →
+    右移動:  l    d    ←
+    下移動:  k    s    ↓
+    右回転:  o
+    左回転:  u
+    ホールド:  h
+    ハードドロップ:  ,    Speace
+    リセット:  r
+        </pre>
+        <hr>
+        <br><br>
+    </div>
+
+    <canvas class="canvas" id="canvas" width="500" height="630"></canvas>
+    <canvas class="Hold" id="Hold" width="100" height="100"></canvas>
+
+    
+    <img class="img1" src="{{ url_for('static', filename='images/KeyBoard.jpeg')}}">
+    
+    <div class="img2">
+        <img id="RotateLeft" src="{{ url_for('static', filename='images/RotateLeft.jpeg') }}">
+        <img id="HardDrop" src="{{ url_for('static', filename='images/HardDrop.jpeg') }}">
+        <img id="RotateRight" src="{{ url_for('static', filename='images/RotateRight.jpeg') }}">
+    </div>
+    <div class="img3">
+        <img id="ArrowLeft" src="{{ url_for('static', filename='images/ArrowLeft.jpeg') }}">
+        <img id="ArrowDown" src="{{ url_for('static', filename='images/ArrowDown.jpeg') }}">
+        <img id="ArrowRight" src="{{ url_for('static', filename='images/ArrowRight.jpeg') }}">
+    </div>
+    <div class="img4">
+        <img id="HoldBtn" src="{{ url_for('static', filename='images/Hold.jpeg') }}">
+    </div>
+
+    <script src="{{ url_for('static', filename='tetris.js' )}}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⭕️❌ゲーム</title>
+    <style>
+        body{
+            background-color: #ff8;
+            justify-content: center;
+        }
+        canvas{
+            display: block;
+            margin-left: 200px;
+        }
+        .Widget{
+            position:fixed;
+            top:10%;
+            right:0;
+            z-index:1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>⭕️❌ゲーム</h1>
+    <h2 id="turn">現在のプレイヤー: ❌</h2>
+    <p>
+        <button id="reset">リセット</button>
+        <a href="/">TOPページへ</a>
+    </p>
+    <canvas id="canvas" width="470", height="470"></canvas>
+
+    <!-- MAF Rakuten Widget FROM HERE -->
+    <div class="Widget">
+        <script type="text/javascript">MafRakutenWidgetParam=function() { return{ size:'148x600',design:'slide',recommend:'on',auto_mode:'on',a_id:'4968581', border:'on'};};</script><script type="text/javascript" src="//image.moshimo.com/static/publish/af/rakuten/widget.js"></script>
+    </div>
+    <!-- MAF Rakuten Widget TO HERE -->
+    
+    <script src="{{ url_for('static', filename='marubatu.js') }}" defer></script>
+</body>
+</html>
