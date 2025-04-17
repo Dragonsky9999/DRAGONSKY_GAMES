@@ -26,6 +26,36 @@ const marioInfo = {
 }
 const speed = 5;
 
+//エンティティ
+class Entity{
+    constructor(x,y,type, vx){
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.vx = vx;
+        this.width = gridSize;
+        this.height = gridSize;
+    }
+    update(){
+        this.x += this.vx;
+    }
+    draw(){
+        if (this.type === "kuribo"){
+            ctx.drawImage(sprite,160,160,80,80,this.x - cameraX,this.y,this.width,this.height)
+        }
+    }
+}
+
+let Enemies = [
+    new Entity(gridSize*15,gridSize*8,"kuribo",-1),
+    new Entity(gridSize*20,gridSize*8,"kuribo",-1),
+    new Entity(gridSize*25,gridSize*8,"kuribo",-1),
+]
+
+
+
+
+
 //カメラ
 let cameraX;
 
@@ -57,8 +87,8 @@ const stageMap = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
 function drawBlock(tile, x, y){
@@ -115,8 +145,14 @@ function drawStage() {
 
 function drawMario() {
     if (marioInfo.y > 0 && marioInfo.y > 0) {
-        ctx.drawImage(sprite,0,0,16*spriteGridSize-15,16*spriteGridSize, marioInfo.x - cameraX , marioInfo.y, marioInfo.width, marioInfo.height);
+        ctx.drawImage(sprite,0,0,16*spriteGridSize-5,16*spriteGridSize, marioInfo.x - cameraX - 5, marioInfo.y, marioInfo.width, marioInfo.height);
     }
+}
+
+function drawEnemy(){
+    Enemies.forEach(e => {
+        e.draw();
+    })
 }
 
 function jump(){
@@ -141,6 +177,12 @@ function upadateCamera(){
     const maxScroleX = stageMap[0].length * gridSize - canvas.width; 
 
     cameraX = Math.max(0, Math.min(cameraX, maxScroleX))
+}
+
+function updateEnemies(){
+    Enemies.forEach(e => {
+        e.update();
+    })
 }
 
 
@@ -237,15 +279,19 @@ function reseloveCollistion(tile, tileX, tileY){
 
 
 
+
 function gameloop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     updateMario();
     upadateCamera();
     checkCollision();
+    updateEnemies();
     
     
     drawStage();
     drawMario();
+    drawEnemy();
+    ctx.drawImage(sprite, 160, 160, 80 ,80, marioInfo.x + gridSize - cameraX, marioInfo.y, gridSize,gridSize )
 
     handleKeyInput();
     requestAnimationFrame(gameloop);
@@ -263,13 +309,13 @@ function handleKeyInput(){
     document.addEventListener("keyup", (e) => {
         keys[e.key] = false;
     })
-    if (keys["ArrowRight"]){
+    if (keys["ArrowRight"] || keys["d"]){
         marioInfo.vx = speed;
     }
-    if (keys["ArrowLeft"]){
+    if (keys["ArrowLeft"] || keys["a"]){
         marioInfo.vx = -speed;
     }
-    if (keys[" "]){
+    if (keys[" "] || keys["ArrowUp"] || keys["w"]){
         console.log("jump");
         jump();
     }
