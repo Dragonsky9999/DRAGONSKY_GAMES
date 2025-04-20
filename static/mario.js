@@ -15,7 +15,7 @@ const gravity = 0.5;
 
 //marioの基本情報
 const marioInfo = {
-    x: gridSize * 3,
+    x: gridSize * 10,
     y : canvas.height - gridSize * 3,
     preX: gridSize * 3,
     preY: canvas.height - gridSize * 3,
@@ -86,9 +86,9 @@ const stageMap = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","G","","O","","A","","L","","","",""],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,3,2,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,3,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,3,2,0,0,0,2,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
-    [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
-    [0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
-    [0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
+    [0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"","","","","","","","","","","","","","","",""],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
@@ -146,7 +146,7 @@ function drawStage() {
     
 
 function drawMario() {
-    if (marioInfo.y > 0 && marioInfo.y > 0) {
+    if (marioInfo.y > 0) {
         ctx.drawImage(sprite,0,0,16*spriteGridSize,16*spriteGridSize, marioInfo.x - cameraX, marioInfo.y, marioInfo.width, marioInfo.height);
     }
 }
@@ -157,10 +157,10 @@ function drawEnemy(){
     })
 }
 
-function isGround() {
-    const nextY = marioInfo.y + marioInfo.height + 1; // マリオのちょっと下
-    const leftX = marioInfo.x;
-    const rightX = marioInfo.x + marioInfo.width;
+function isGround(entity) {
+    const nextY = entity.y + entity.height + 1; // マリオのちょっと下
+    const leftX = entity.x;
+    const rightX = entity.x + entity.width;
 
     const leftCol = Math.floor(leftX / gridSize);
     const rightCol = Math.floor(rightX / gridSize);
@@ -177,24 +177,28 @@ function isGround() {
 
 
 function jump(){
-    if (isGround()){
+    if (isGround(marioInfo)){
         marioInfo.vy = marioInfo.jumpStrength;
         marioInfo.jumping = true;
     }
 }
 
 function updateMario() {
-    marioInfo.preX = marioInfo.x;
-    marioInfo.preY = marioInfo.y;
-    marioInfo.vy += gravity;
+    //marioInfo.preY = marioInfo.y;
+    
     marioInfo.y += marioInfo.vy;
     marioInfo.x += marioInfo.vx;
+    checkCollision("y");
+    
+    marioInfo.vy += gravity;
+    checkCollision("x");
+    applyFriction();
+    console.log(marioInfo.x,marioInfo.y)
 
-    checkCollision();
+    // if (marioInfo.y > canvas.height){
+    //     window.alert("何してんねん")
+    // }
 
-    if (marioInfo.y > canvas.height){
-        window.alert("何してんねん")
-    }
 }
 
 function upadateCamera(){
@@ -229,44 +233,45 @@ function isColliding(ax, ay, aw, ah, bx, by, bw, bh) {
     return overlapX > 0 && overlapY > 0
 }
 
-function collidingDirection(preX, preY, newX, newY, aw, ah, bx, by, bw, bh){
-    const ax1 = newX;
-    const ay1 = newY;
-    const ax2 = newX + aw;
-    const ay2 = newY + ah;
+// function collidingDirection(preX, preY, newX, newY, aw, ah, bx, by, bw, bh){
+//     const ax1 = newX;
+//     const ay1 = newY;
+//     const ax2 = newX + aw;
+//     const ay2 = newY + ah;
 
-    const bx1 = bx;
-    const by1 = by;
-    const bx2 = bx + bw;
-    const by2 = by + bh;
+//     const bx1 = bx;
+//     const by1 = by;
+//     const bx2 = bx + bw;
+//     const by2 = by + bh;
 
-    const overlapX = Math.min(ax2, bx2) - Math.max(ax1, bx1);
-    const overlapY = Math.min(ay2, by2) - Math.max(ay1, by1);
+//     const overlapX = Math.min(ax2, bx2) - Math.max(ax1, bx1);
+//     const overlapY = Math.min(ay2, by2) - Math.max(ay1, by1);
 
-    if (overlapX < overlapY){
-        if (preX + aw <= bx) return "Right"; // 右から衝突（→）
-        if (preX >= bx + bw) return "Left";  // 左から衝突（←）
-    } else {
-        if (preY + ah <= by) return "Down";  // 上から着地（↓）
-        if (preY >= by + bh) return "Up";    // 下から頭ゴツン（↑）
-    }
-}
+//     if (overlapX < overlapY){
+//         if (newX + aw/2 <= bx + bw/2) return "Right"; // 右から衝突（→）
+//         else return "Left";  // 左から衝突（←）
+//     } else {
+//         if (newY + ah/2 <= by + bh/2) return "Down";  // 上から着地（↓）
+//         else return "Up";    // 下から頭ゴツン（↑）
+//     }
+// }
 
 
-function checkCollision(){
+function checkCollision(axis){
     for (let row = 0; row < stageMap.length; row++){
         for (let col = 0; col < stageMap[row].length; col++){
-            let tile = stageMap[row][col];
             let tileX = col * gridSize;
             let tileY = row * gridSize;
 
             //画面
             if (isColliding(marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height,
                 tileX, tileY, gridSize, gridSize)){
-                reseloveCollistion(tile, tileX, tileY);
+                reseloveCollistion(tileX, tileY, axis);
             }
         }
     }
+
+    //ステージ外
     if (marioInfo.x < 0){
         marioInfo.x = 0;
     }else if (marioInfo.x + marioInfo.width > stageMap[0].length * gridSize){
@@ -274,64 +279,93 @@ function checkCollision(){
     }
 }
 
-function standardCollding(tile, tileX, tileY){
-    const marioDirection = collidingDirection(marioInfo.preX, marioInfo.preY, marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height, tileX, tileY, gridSize, gridSize); 
-    
-    console.log(marioDirection)
-    if (marioDirection == "Down"){
-        marioInfo.y = tileY - marioInfo.height;
-        marioInfo.vy = 0;
-        marioInfo.jumping = false;    
-    }else if (marioDirection == "Right"){
-        marioInfo.x = tileX - marioInfo.width;
-        marioInfo.vx = 0;
-    }else if (marioDirection == "Left"){
-        marioInfo.x = tileX + gridSize;
-        marioInfo.vx = 0;
-    }else if (marioDirection == "Up"){
-        marioInfo.y = tileY + gridSize;
-        marioInfo.vy = 0;
-    }
+// function standardCollding(tileX, tileY, axis){
+//     //const marioDirection = collidingDirection(marioInfo.preX, marioInfo.preY, marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height, tileX, tileY, gridSize, gridSize); 
+//     //console.log(marioDirection)
+//     if (marioDirection == "Down"){
+//         marioInfo.y = tileY - marioInfo.height;
+//         marioInfo.vy = 0;
+//         marioInfo.jumping = false;
+//         return;    
+//     }else if (marioDirection == "Right"){
+//         marioInfo.x = tileX - marioInfo.width;
+//         marioInfo.vx = 0;
+//     }else if (marioDirection == "Left"){
+//         marioInfo.x = tileX + gridSize;
+//         marioInfo.vx = 0;
+//     }else if (marioDirection == "Up"){
+//         marioInfo.y = tileY + gridSize;
+//         marioInfo.vy = 0;
+//     }
+function isSolid(tile){
+    return (tile === tileBlock || tile === tileBlock || tile === tileQuestion || tile === pushedBlock )
 }
 
-
-
-function reseloveCollistion(tile, tileX, tileY){
-    const marioDirection = collidingDirection(marioInfo.preX, marioInfo.preY, marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height, tileX, tileY, gridSize, gridSize); 
-
-    //ブッロク
-    switch(tile){
-        case tileBrick:
-            standardCollding(tile, tileX, tileY);
-            break;
-        case tileBlock:
-            standardCollding(tile, tileX, tileY);
-            if (marioDirection == "Up"){
-                let row = Math.floor(marioInfo.y / gridSize) - 1;
-                let col = Math.floor(marioInfo.x / gridSize);
-                if (stageMap[row][col] == tileBlock){
-                    stageMap[row][col] = tileEmpty;
+function reseloveCollistion(tileX, tileY, axis){
+    //const marioDirection = collidingDirection(marioInfo.preX, marioInfo.preY, marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height, tileX, tileY, gridSize, gridSize); 
+    for (let row=0; row<stageMap.length; row++){
+        for (let col=0; col<stageMap[row].length; col++){
+            const tile = stageMap[row][col];
+            if (!isSolid(tile)) continue;
+    
+            if (axis === "x"){
+                if (marioInfo.vx > 0){
+                    marioInfo.x = tileX - marioInfo.width;
+                    marioInfo.vx = 0;
+                }else if (marioInfo < 0){
+                    marioInfo.x = tileX + gridSize;
+                    marioInfo.vx = 0;
+                }
+                marioInfo.vx = 0;
+            }
+            if (axis === "y"){
+                if (marioInfo.vy > 0){
+                    marioInfo.y = tileY - marioInfo.height;
+                    marioInfo.vy = 0;
+                    marioInfo.jumping = false;
+                }else if (marioInfo.vy < 0){
+                    marioInfo.y = tileY + gridSize;
+                    marioInfo.vy = 0;
                 }
             }
-            break;
-        
-        case tileQuestion:
-            standardCollding(tile, tileX, tileY);
-            if (marioDirection == "Up"){
-                let row = Math.floor(marioInfo.y / gridSize) - 1; 
-                let col = Math.floor(marioInfo.x / gridSize);
-                if (stageMap[row][col] === tileQuestion){
-                    stageMap[row][col] = pushedBlock;
-                }
-            }
-            break;
-        case pushedBlock:
-            standardCollding(tile, tileX, tileY);
-            break;
-        
-        case tileEmpty:
-            break;
+        }
     }
+    // //ブッロク
+    // switch(tile){
+    //     case tileBrick:
+    //         standardCollding(tileX, tileY, axis);
+    //         break;
+    //     case tileBlock:
+    //         standardCollding(tileX, tileY, axis);
+    //         if (marioDirection == "Up"){
+    //             let row = Math.floor(marioInfo.y / gridSize) - 1;
+    //             let col = Math.floor((marioInfo.x + marioInfo.width / 2) / gridSize);
+    //             if (stageMap[row][col] == tileBlock){
+    //                 stageMap[row][col] = tileEmpty;
+    //             }
+    //         }
+    //         break;
+        
+    //     case tileQuestion:
+    //         standardCollding(tileX, tileY, axis);
+    //         if (marioDirection == "Up"){
+    //             let row = Math.floor(marioInfo.y / gridSize) - 1; 
+    //             let col = Math.floor((marioInfo.x + marioInfo.width / 2) / gridSize);
+    //             if (stageMap[row][col] === tileQuestion){
+    //                 stageMap[row][col] = pushedBlock;
+    //             }
+    //         }
+    //         break;
+    //     case pushedBlock:
+    //         standardCollding(tileX, tileY, axis);
+    //         break;
+        
+    //     case tileEmpty:
+    //         break;
+    // }
+            
+    //     }
+    // }
 }
 
 
@@ -347,6 +381,8 @@ function gameloop() {
     drawStage();
     drawMario();
     drawEnemy();
+    ctx.fillStyle = "rgb(255 255 255 / 80)"
+    ctx.fillRect(marioInfo.x - cameraX, marioInfo.y, marioInfo.width, marioInfo.height)
 
     handleKeyInput();
     requestAnimationFrame(gameloop);
@@ -356,12 +392,28 @@ function gameloop() {
 gameloop();
 
 
-function handleKeyInput(){
-    const accelGround = 0.3;
-    const accelAir = 0.1;
-    const maxSpeed = 5;
+function applyFriction(){
+    const frictionGround = 0.3;
+    const frinctionAir = 0.01;
 
-    const accel = isGround() ? accelGround : accelAir
+    const friction = isGround(marioInfo) ? frictionGround : frinctionAir;
+
+    if (!(keys["ArrowRight"] || keys["d"]|| keys["ArrowLeft"] || keys["a"])){
+        if (marioInfo.vx > 0){
+            marioInfo.vx = Math.max(0, marioInfo.vx - friction);
+        }else if (marioInfo.vx < 0){
+            marioInfo.vx = Math.min(0, marioInfo.vx + friction);
+        }
+    }
+}
+
+
+function handleKeyInput(){
+    const accelGround = 0.2;
+    const accelAir = 0.08;
+    const maxSpeed = 6;
+
+    const accel = isGround(marioInfo) ? accelGround : accelAir;
 
     document.addEventListener("keydown", (e) => {
         e.preventDefault();
@@ -380,8 +432,5 @@ function handleKeyInput(){
     if (keys[" "] || keys["ArrowUp"] || keys["w"]){
         console.log("jump");
         jump();
-    }
-    if (!keys["ArrowRight"] && !keys["ArrowLeft"]){
-        marioInfo.vx = 0;
     }
 }
