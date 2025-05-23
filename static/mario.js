@@ -433,6 +433,11 @@ function enemiesCollision(){
     for (let i = 0; i < Enemies.length; i++) {
         const enemy = Enemies[i];
 
+        if (enemy.type == "water"){
+            marioInfo.thirsty = false;
+            return;
+        };
+
         if (!marioInfo.invincible && isColliding(
             marioInfo.x, marioInfo.y, marioInfo.width, marioInfo.height,
             enemy.x, enemy.y, gridSize, gridSize)){
